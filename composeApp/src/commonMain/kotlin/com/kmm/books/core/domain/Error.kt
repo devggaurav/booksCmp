@@ -1,4 +1,4 @@
-package com.kmm.books.domain
+package com.kmm.books.core.domain
 
 
 //

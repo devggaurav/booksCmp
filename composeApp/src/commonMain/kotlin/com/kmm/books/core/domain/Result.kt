@@ -1,8 +1,8 @@
-package com.kmm.books.domain
+package com.kmm.books.core.domain
 
 sealed interface Result<out D, out E: Error> {
     data class Success<out D>(val data: D): Result<D, Nothing>
-    data class Error<out E: com.kmm.books.domain.Error>(val error: E):
+    data class Error<out E: com.kmm.books.core.domain.Error>(val error: E):
         Result<Nothing, E>
 }
 

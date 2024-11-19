@@ -1,4 +1,4 @@
-package com.kmm.books.presentation
+package com.kmm.books.core.presentation
 
 import androidx.compose.ui.graphics.Color
 

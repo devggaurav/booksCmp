@@ -1,9 +1,15 @@
 package com.kmm.books.book.presentation.book_list.components
 
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.OutlinedTextField
-import androidx.compose.material.Text
-import androidx.compose.material.TextFieldDefaults
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Search
+import androidx.compose.material3.ExposedDropdownMenuDefaults.outlinedTextFieldColors
+import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.OutlinedTextField
+import androidx.compose.material3.OutlinedTextFieldDefaults
+import androidx.compose.material3.Text
+import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import com.kmm.books.core.presentation.DarkBlue
@@ -32,7 +38,7 @@ fun BookSearchBar(
         maxLines = 1,
         singleLine = true,
         shape = RoundedCornerShape(100),
-        colors = TextFieldDefaults.outlinedTextFieldColors(
+        colors = OutlinedTextFieldDefaults.colors(
             cursorColor = DarkBlue,
             focusedBorderColor = SandYellow
 
@@ -40,6 +46,13 @@ fun BookSearchBar(
         placeholder = {
             Text(
                 text = stringResource(Res.string.search_hint)
+            )
+        },
+        leadingIcon = {
+            Icon(
+                imageVector = Icons.Default.Search,
+                contentDescription = null,
+                tint = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.66f)
             )
         }
 

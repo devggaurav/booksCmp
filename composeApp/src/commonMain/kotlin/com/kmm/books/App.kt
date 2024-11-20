@@ -10,6 +10,8 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import com.kmm.books.book.presentation.book_list.BookListScreenRoot
+import com.kmm.books.book.presentation.book_list.BookListViewModel
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.ui.tooling.preview.Preview
 
@@ -19,4 +21,10 @@ import gcbookscmp.composeapp.generated.resources.compose_multiplatform
 @Composable
 @Preview
 fun App() {
+    BookListScreenRoot(
+        viewModel = remember { BookListViewModel() },
+        onBookCLick = {
+
+        }
+    )
 }

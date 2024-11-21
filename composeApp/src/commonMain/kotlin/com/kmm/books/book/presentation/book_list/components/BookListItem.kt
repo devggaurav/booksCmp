@@ -12,8 +12,13 @@ import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.filled.KeyboardArrowRight
+import androidx.compose.material.icons.filled.Star
 import androidx.compose.material3.CircularProgressIndicator
+import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
@@ -30,9 +35,11 @@ import androidx.compose.ui.unit.dp
 import coil3.compose.rememberAsyncImagePainter
 import com.kmm.books.book.domain.Book
 import com.kmm.books.core.presentation.LightBlue
+import com.kmm.books.core.presentation.SandYellow
 import gcbookscmp.composeapp.generated.resources.Res
 import gcbookscmp.composeapp.generated.resources.book_error_2
 import org.jetbrains.compose.resources.painterResource
+import kotlin.math.round
 
 
 //
@@ -112,7 +119,39 @@ fun BookListItem(
                     style = MaterialTheme.typography.titleMedium
                 )
 
+                book.authors.firstOrNull()?.let { author ->
+                    Text(
+                        text = author,
+                        maxLines = 1,
+                        overflow = TextOverflow.Ellipsis,
+                        style = MaterialTheme.typography.bodyLarge
+                    )
+                }
+
+                book.averageRating?.let { rating ->
+                    Row(
+                        verticalAlignment = Alignment.CenterVertically
+                    ) {
+                        Text(
+                            text = "${round(rating * 10) / 10.0}",
+                            style = MaterialTheme.typography.bodyMedium
+                        )
+                        Icon(
+                            imageVector = Icons.Default.Star,
+                            contentDescription = "",
+                            tint = SandYellow
+                        )
+                    }
+                }
+
+
             }
+
+            Icon(
+                imageVector = Icons.AutoMirrored.Filled.KeyboardArrowRight,
+                contentDescription = "",
+                modifier = Modifier.size(36.dp)
+            )
 
 
         }

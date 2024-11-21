@@ -2,8 +2,10 @@ package com.kmm.books.book.presentation.book_list
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.statusBarsPadding
 import androidx.compose.foundation.layout.widthIn
@@ -11,6 +13,8 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Tab
 import androidx.compose.material3.TabRow
+import androidx.compose.material3.TabRowDefaults
+import androidx.compose.material3.TabRowDefaults.tabIndicatorOffset
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -24,6 +28,10 @@ import com.kmm.books.book.presentation.book_list.components.BookSearchBar
 import com.kmm.books.core.presentation.DarkBlue
 import com.kmm.books.core.presentation.DesertWhite
 import com.kmm.books.core.presentation.SandYellow
+import gcbookscmp.composeapp.generated.resources.Res
+import gcbookscmp.composeapp.generated.resources.favorites
+import gcbookscmp.composeapp.generated.resources.search_reseults
+import org.jetbrains.compose.resources.stringResource
 import org.koin.compose.viewmodel.koinViewModel
 
 
@@ -93,7 +101,16 @@ fun BookListScreen(
                 TabRow(
                     selectedTabIndex = state.selectedTabIndex,
                     modifier = Modifier.padding(vertical = 12.dp).widthIn(max = 700.dp)
-                        .fillMaxWidth()
+                        .fillMaxWidth(),
+                    containerColor = DesertWhite,
+                    contentColor = SandYellow,
+                    indicator = {
+                        TabRowDefaults.SecondaryIndicator(
+                            modifier = Modifier.tabIndicatorOffset(
+                                currentTabPosition = it[state.selectedTabIndex]
+                            )
+                        )
+                    }
                 ) {
                     Tab(
                         selected = state.selectedTabIndex == 0,
@@ -101,7 +118,27 @@ fun BookListScreen(
                             onAction(BookListAction.OnTabSelected(0))
                         },
                         text = {
-                            Text(text = "All")
+                            Text(
+                                text = stringResource(Res.string.search_reseults),
+                                modifier = Modifier.padding(vertical = 12.dp)
+                            )
+
+                        },
+                        modifier = Modifier.weight(1f),
+                        selectedContentColor = SandYellow,
+                        unselectedContentColor = DarkBlue.copy(alpha = 0.5f)
+
+                    )
+                    Tab(
+                        selected = state.selectedTabIndex == 1,
+                        onClick = {
+                            onAction(BookListAction.OnTabSelected(1))
+                        },
+                        text = {
+                            Text(
+                                text = stringResource(Res.string.favorites),
+                                modifier = Modifier.padding(vertical = 12.dp)
+                            )
 
                         },
                         modifier = Modifier.weight(1f),
@@ -112,6 +149,7 @@ fun BookListScreen(
 
 
                 }
+                Spacer(modifier = Modifier.height(4.dp))
 
 
             }

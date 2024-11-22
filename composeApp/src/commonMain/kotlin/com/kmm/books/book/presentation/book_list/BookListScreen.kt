@@ -85,6 +85,7 @@ fun BookListScreen(
 
     val pagerState = rememberPagerState { 2 }
     val searchResultListState = rememberLazyListState()
+    val favoriteBookListState = rememberLazyListState()
 
     LaunchedEffect(state.searchResult) {
         searchResultListState.animateScrollToItem(0)
@@ -235,6 +236,18 @@ fun BookListScreen(
                                         style = MaterialTheme.typography.headlineSmall,
                                         color = MaterialTheme.colorScheme.error
                                     )
+                                }else {
+
+                                    BookList(
+                                        books = state.favoritesBook,
+                                        onBookClick = {
+                                            onAction(BookListAction.OnBookClick(it))
+                                        },
+                                        modifier = Modifier.fillMaxSize(),
+                                        scrollState = favoriteBookListState
+
+                                    )
+
                                 }
 
 

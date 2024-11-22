@@ -4,4 +4,6 @@
     <string name="clear_search">close</string>
     <string name="search_reseults">Search Results</string>
     <string name="favorites">Favorites</string>
+    <string name="no_search_results">Oops, there are no books</string>
+    <string name="no_favorites_found">You have not saved any favorites yet</string>
 </resources>

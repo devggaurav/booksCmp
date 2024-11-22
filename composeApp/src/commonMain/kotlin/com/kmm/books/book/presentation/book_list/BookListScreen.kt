@@ -91,6 +91,15 @@ fun BookListScreen(
         searchResultListState.animateScrollToItem(0)
     }
 
+    LaunchedEffect(state.selectedTabIndex) {
+        pagerState.animateScrollToPage(state.selectedTabIndex)
+    }
+    LaunchedEffect(pagerState.currentPage) {
+        // if (!pagerState.isScrollInProgress) {
+        onAction(BookListAction.OnTabSelected(pagerState.currentPage))
+        //   }
+    }
+
     Column(
         modifier = Modifier.fillMaxSize().background(
             DarkBlue
@@ -229,14 +238,14 @@ fun BookListScreen(
 
                             1 -> {
 
-                                if (state.favoritesBook.isEmpty()){
+                                if (state.favoritesBook.isEmpty()) {
                                     Text(
                                         text = stringResource(Res.string.no_favorites_found),
                                         textAlign = TextAlign.Center,
                                         style = MaterialTheme.typography.headlineSmall,
-                                        color = MaterialTheme.colorScheme.error
-                                    )
-                                }else {
+
+                                        )
+                                } else {
 
                                     BookList(
                                         books = state.favoritesBook,

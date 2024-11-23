@@ -27,7 +27,9 @@ object HttpClientFactory {
                 json(
                     json = Json {
                         ignoreUnknownKeys = true
-
+                        prettyPrint = true
+                        isLenient = true
+                        explicitNulls = false
                     }
                 )
             }

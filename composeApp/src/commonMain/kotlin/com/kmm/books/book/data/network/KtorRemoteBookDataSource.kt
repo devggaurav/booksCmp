@@ -15,7 +15,7 @@ import io.ktor.client.request.parameter
 // Copyright (c) 2024 CFA. All rights reserved.
 //
 
-private val BASE_URL = "https://openlibrary.org"
+private const val BASE_URL = "https://openlibrary.org"
 
 
 class KtorRemoteBookDataSource(
@@ -28,7 +28,7 @@ class KtorRemoteBookDataSource(
     ): Result<SearchResponseDto, DataError.Remote> {
 
 
-        return safeCall {
+        return safeCall<SearchResponseDto> {
             httpClient.get(urlString = "$BASE_URL/search.json") {
                 parameter("q", query)
                 parameter("limit", resultLimit)

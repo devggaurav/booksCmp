@@ -12,6 +12,7 @@ import org.koin.core.module.dsl.singleOf
 import org.koin.core.module.dsl.viewModelOf
 import org.koin.dsl.bind
 import org.koin.dsl.module
+import com.kmm.books.book.SelectedBookViewModel
 
 
 //
@@ -21,13 +22,14 @@ import org.koin.dsl.module
 
 expect val platformModule: Module
 
-
 val sharedModule = module {
     single { HttpClientFactory.create(get()) }
     singleOf(::KtorRemoteBookDataSource).bind<RemoteBookDataSource>()
     singleOf(::DefaultBookRepository).bind<BookRepository>()
 
 
-
     viewModelOf(::BookListViewModel)
+    viewModelOf(::SelectedBookViewModel)
+
+
 }

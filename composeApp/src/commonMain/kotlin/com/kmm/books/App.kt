@@ -21,22 +21,14 @@ import org.jetbrains.compose.ui.tooling.preview.Preview
 import gcbookscmp.composeapp.generated.resources.Res
 import gcbookscmp.composeapp.generated.resources.compose_multiplatform
 import io.ktor.client.engine.HttpClientEngine
+import org.koin.compose.viewmodel.koinViewModel
 
 @Composable
 @Preview
-fun App(engine: HttpClientEngine) {
+fun App() {
+    val viewModel = koinViewModel<BookListViewModel>()
     BookListScreenRoot(
-        viewModel = remember {
-            BookListViewModel(
-                bookRepository = DefaultBookRepository(
-                    remoteBookDataSource = KtorRemoteBookDataSource(
-                        httpClient = HttpClientFactory.create(
-                            engine = engine
-                        )
-                    )
-                )
-            )
-        },
+        viewModel = viewModel,
         onBookCLick = {
 
         }

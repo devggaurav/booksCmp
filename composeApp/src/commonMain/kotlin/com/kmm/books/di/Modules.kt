@@ -13,6 +13,7 @@ import org.koin.core.module.dsl.viewModelOf
 import org.koin.dsl.bind
 import org.koin.dsl.module
 import com.kmm.books.book.SelectedBookViewModel
+import com.kmm.books.book.presentation.book_details.BookDetailsViewModel
 
 
 //
@@ -29,6 +30,7 @@ val sharedModule = module {
 
 
     viewModelOf(::BookListViewModel)
+    viewModelOf(::BookDetailsViewModel)
     viewModelOf(::SelectedBookViewModel)
 
 

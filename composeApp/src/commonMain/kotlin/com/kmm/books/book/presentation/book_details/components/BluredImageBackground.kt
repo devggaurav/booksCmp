@@ -6,11 +6,18 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.statusBarsPadding
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.filled.ArrowBack
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.blur
 import androidx.compose.ui.graphics.painter.Painter
@@ -21,6 +28,7 @@ import com.kmm.books.core.presentation.DarkBlue
 import com.kmm.books.core.presentation.DesertWhite
 import gcbookscmp.composeapp.generated.resources.Res
 import gcbookscmp.composeapp.generated.resources.book_cover
+import gcbookscmp.composeapp.generated.resources.go_back
 import org.jetbrains.compose.resources.stringResource
 
 
@@ -83,6 +91,17 @@ fun BlurredImageBackground(
             }
 
 
+        }
+        IconButton(
+            onClick = onBackClick,
+            modifier = Modifier.align(Alignment.TopStart).padding(top = 16.dp, start = 16.dp)
+                .statusBarsPadding(),
+
+            ) {
+            Icon(
+                imageVector = Icons.AutoMirrored.Filled.ArrowBack,
+                contentDescription = stringResource(Res.string.go_back),
+            )
         }
 
 

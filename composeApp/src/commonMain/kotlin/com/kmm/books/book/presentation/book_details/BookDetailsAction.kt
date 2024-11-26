@@ -1,5 +1,7 @@
 package com.kmm.books.book.presentation.book_details
 
+import com.kmm.books.book.domain.Book
+
 
 //
 // Created by Code For Android on 26/11/24.
@@ -7,4 +9,8 @@ package com.kmm.books.book.presentation.book_details
 //
 
 sealed interface BookDetailsAction {
+
+    data object OnBackClick : BookDetailsAction
+    data object OnFavoriteClick : BookDetailsAction
+    data class OnSelectedBookChange(val book: Book) : BookDetailsAction
 }

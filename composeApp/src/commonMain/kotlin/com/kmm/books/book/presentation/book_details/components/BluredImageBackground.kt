@@ -10,6 +10,7 @@ import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.statusBarsPadding
 import androidx.compose.foundation.layout.width
@@ -129,7 +130,7 @@ fun BlurredImageBackground(
         ) {
             Spacer(modifier = Modifier.fillMaxHeight(0.15f))
             ElevatedCard(
-                modifier = Modifier.width(200.dp).aspectRatio(2 / 3f),
+                modifier = Modifier.height(230.dp).aspectRatio(2 / 3f),
                 shape = RoundedCornerShape(8.dp),
                 colors = CardDefaults.elevatedCardColors(
                     containerColor = Color.Transparent

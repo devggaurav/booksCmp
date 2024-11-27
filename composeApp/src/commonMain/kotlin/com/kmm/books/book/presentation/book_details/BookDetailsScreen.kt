@@ -1,6 +1,7 @@
 package com.kmm.books.book.presentation.book_details
 
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.ExperimentalLayoutApi
 import androidx.compose.foundation.layout.FlowRow
@@ -15,6 +16,7 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Star
+import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
@@ -22,6 +24,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
@@ -31,6 +34,7 @@ import com.kmm.books.book.presentation.book_details.components.ChipSize
 import com.kmm.books.book.presentation.book_details.components.TitledContent
 import com.kmm.books.core.presentation.SandYellow
 import gcbookscmp.composeapp.generated.resources.Res
+import gcbookscmp.composeapp.generated.resources.description_unavailable
 import gcbookscmp.composeapp.generated.resources.languages
 import gcbookscmp.composeapp.generated.resources.pages
 import gcbookscmp.composeapp.generated.resources.rating
@@ -187,13 +191,34 @@ private fun BookDetailsScreen(
                     }
                 }
 
-                 Text(
-                     text = stringResource(Res.string.synopsis),
-                     style = MaterialTheme.typography.titleLarge,
-                     modifier = Modifier.align(Alignment.Start).fillMaxWidth().padding(top = 24.dp, bottom = 8.dp)
-                 )
-
-
+                Text(
+                    text = stringResource(Res.string.synopsis),
+                    style = MaterialTheme.typography.titleLarge,
+                    modifier = Modifier.align(Alignment.Start).fillMaxWidth()
+                        .padding(top = 24.dp, bottom = 8.dp)
+                )
+                if (state.isLoading) {
+                    Box(
+                        modifier = Modifier.fillMaxWidth().weight(1f),
+                        contentAlignment = Alignment.Center
+                    ) {
+                        CircularProgressIndicator()
+                    }
+                } else {
+                    Text(
+                        text = if (state.book.description.isNullOrBlank()) {
+                            stringResource(Res.string.description_unavailable)
+                        } else {
+                            state.book.description
+                        },
+                        style = MaterialTheme.typography.bodyMedium,
+                        textAlign = TextAlign.Justify,
+                        color = if (state.book.description.isNullOrBlank()) {
+                            Color.Black.copy(alpha = 0.4f)
+                        } else Color.Black,
+                        modifier = Modifier.padding(vertical = 8.dp)
+                    )
+                }
 
 
             }

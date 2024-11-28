@@ -1,5 +1,6 @@
 package com.kmm.books.book.data.mappers
 
+import com.kmm.books.book.data.database.BookEntity
 import com.kmm.books.book.data.dto.SearchBookDto
 import com.kmm.books.book.domain.Book
 
@@ -10,12 +11,11 @@ import com.kmm.books.book.domain.Book
 //
 
 
-
 fun SearchBookDto.toBook(): Book {
     return Book(
         id = id.substringAfterLast("/"),
         title = title,
-        imageUrl = if(coverKey != null) {
+        imageUrl = if (coverKey != null) {
             "https://covers.openlibrary.org/b/olid/${coverKey}-L.jpg"
         } else {
             "https://covers.openlibrary.org/b/id/${coverAlternativeKey}-L.jpg"
@@ -28,5 +28,22 @@ fun SearchBookDto.toBook(): Book {
         ratingsCount = ratingsCount,
         numPages = numPagesMedian,
         numEditions = editionCount ?: 0
+    )
+}
+
+
+fun Book.toBookEntity(): BookEntity {
+    return BookEntity(
+        id = id,
+        title = title,
+        description = description,
+        imageUrl = imageUrl,
+        languages = languages,
+        authors = authors,
+        firstPublishYear = firstPublishYear,
+        ratingsAverage = averageRating,
+        ratingsCount = ratingsCount,
+        numPagesMedian = numPages,
+        numEditions = numEditions
     )
 }

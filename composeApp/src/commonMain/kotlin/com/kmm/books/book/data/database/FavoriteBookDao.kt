@@ -1,5 +1,6 @@
 package com.kmm.books.book.data.database
 
+import androidx.room.Dao
 import androidx.room.Query
 import androidx.room.Upsert
 import kotlinx.coroutines.flow.Flow
@@ -9,7 +10,7 @@ import kotlinx.coroutines.flow.Flow
 // Created by Code For Android on 28/11/24.
 // Copyright (c) 2024 CFA. All rights reserved.
 //
-
+@Dao
 interface FavoriteBookDao {
 
     @Upsert

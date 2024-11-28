@@ -1,12 +1,16 @@
 package com.kmm.books.book.data.repository
 
+import com.kmm.books.book.data.database.FavoriteBookDao
 import com.kmm.books.book.data.mappers.toBook
 import com.kmm.books.book.data.network.RemoteBookDataSource
 import com.kmm.books.book.domain.Book
 import com.kmm.books.book.domain.BookRepository
 import com.kmm.books.core.domain.DataError
+import com.kmm.books.core.domain.EmptyResult
 import com.kmm.books.core.domain.Result
 import com.kmm.books.core.domain.map
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.map
 
 
 //
@@ -15,7 +19,8 @@ import com.kmm.books.core.domain.map
 //
 
 class DefaultBookRepository(
-    private val remoteBookDataSource: RemoteBookDataSource
+    private val remoteBookDataSource: RemoteBookDataSource,
+    private val favoriteBookDao: FavoriteBookDao
 ) : BookRepository {
 
     override suspend fun searchBooks(query: String): Result<List<Book>, DataError.Remote> {
@@ -31,5 +36,27 @@ class DefaultBookRepository(
         return remoteBookDataSource.getBookDetails(bookId).map {
             it.description
         }
+    }
+
+    override fun getFavoriteBooks(): Flow<List<Book>> {
+        return favoriteBookDao.getFavoriteBooks().map { bookEntities ->
+            bookEntities.map { it.toBook() }
+        }
+    }
+
+    override fun isBookFavorite(bookId: String): Flow<Boolean> {
+        return favoriteBookDao.getFavoriteBooks().map { bookEntities ->
+            bookEntities.any {
+                it.id == bookId
+            }
+        }
+    }
+
+    override suspend fun markAsFavorite(book: Book): EmptyResult<DataError.Local> {
+        TODO("Not yet implemented")
+    }
+
+    override suspend fun deleteFavoriteBook(bookId: String) {
+        TODO("Not yet implemented")
     }
 }

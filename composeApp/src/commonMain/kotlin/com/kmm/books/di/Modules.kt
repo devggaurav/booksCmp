@@ -14,6 +14,7 @@ import org.koin.dsl.bind
 import org.koin.dsl.module
 import com.kmm.books.book.SelectedBookViewModel
 import com.kmm.books.book.data.database.DatabaseFactory
+import com.kmm.books.book.data.database.FavoriteBookDatabase
 import com.kmm.books.book.presentation.book_details.BookDetailsViewModel
 
 
@@ -30,8 +31,10 @@ val sharedModule = module {
     singleOf(::DefaultBookRepository).bind<BookRepository>()
 
     single {
-         get<DatabaseFactory>().create().setDriver(BundledSQLiteDriver()).build()
+        get<DatabaseFactory>().create().setDriver(BundledSQLiteDriver()).build()
     }
+
+    single { get<FavoriteBookDatabase>().favoriteBookDao }
 
     viewModelOf(::BookListViewModel)
     viewModelOf(::BookDetailsViewModel)

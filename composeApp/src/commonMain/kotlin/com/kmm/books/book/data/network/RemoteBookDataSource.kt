@@ -1,5 +1,6 @@
 package com.kmm.books.book.data.network
 
+import com.kmm.books.book.data.dto.BookWorkDto
 import com.kmm.books.book.data.dto.SearchResponseDto
 import com.kmm.books.core.domain.DataError
 import com.kmm.books.core.domain.Result
@@ -17,5 +18,8 @@ interface RemoteBookDataSource {
         query: String,
         resultLimit: Int? = null
     ): Result<SearchResponseDto, DataError.Remote>
+
+
+    suspend fun getBookDetails(bookWorkId: String): Result<BookWorkDto, DataError.Remote>
 
 }

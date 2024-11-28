@@ -8,8 +8,7 @@ import kotlinx.serialization.Serializable
 // Copyright (c) 2024 CFA. All rights reserved.
 //
 
-
-@Serializable(with = BookWorkDtoSerializer::class)
-data class BookWorkDto(
-    val description: String? = null,
+@Serializable
+data class DescriptionDto(
+    val value: String
 )

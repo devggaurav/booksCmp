@@ -49,10 +49,10 @@ fun App() {
                     }
                     BookListScreenRoot(
                         viewModel = viewModel,
-                        onBookCLick = {
-                            selectedBookViewModel.onSelectedBook(it)
+                        onBookCLick = { book ->
+                            selectedBookViewModel.onSelectedBook(book)
                             navController.navigate(
-                                Route.BookDetail(it.id)
+                                Route.BookDetail(book.id)
                             )
                         }
                     )

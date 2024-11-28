@@ -1,5 +1,6 @@
 package com.kmm.books.book.data.network
 
+import com.kmm.books.book.data.dto.BookWorkDto
 import com.kmm.books.book.data.dto.SearchResponseDto
 import com.kmm.books.book.domain.Book
 import com.kmm.books.core.data.safeCall
@@ -40,6 +41,15 @@ class KtorRemoteBookDataSource(
             }
         }
 
+    }
+
+    override suspend fun getBookDetails(bookWorkId: String): Result<BookWorkDto, DataError.Remote> {
+
+        return safeCall<BookWorkDto> {
+            httpClient.get(urlString = "$BASE_URL/works/$bookWorkId.json") {
+
+            }
+        }
     }
 
 

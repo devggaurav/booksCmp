@@ -13,6 +13,7 @@ import org.koin.core.module.dsl.viewModelOf
 import org.koin.dsl.bind
 import org.koin.dsl.module
 import com.kmm.books.book.SelectedBookViewModel
+import com.kmm.books.book.data.database.DatabaseFactory
 import com.kmm.books.book.presentation.book_details.BookDetailsViewModel
 
 
@@ -28,6 +29,9 @@ val sharedModule = module {
     singleOf(::KtorRemoteBookDataSource).bind<RemoteBookDataSource>()
     singleOf(::DefaultBookRepository).bind<BookRepository>()
 
+    single {
+         get<DatabaseFactory>().create().setDriver(BundledSQLiteDriver()).build()
+    }
 
     viewModelOf(::BookListViewModel)
     viewModelOf(::BookDetailsViewModel)

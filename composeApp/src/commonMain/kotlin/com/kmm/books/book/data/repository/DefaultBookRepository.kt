@@ -1,7 +1,9 @@
 package com.kmm.books.book.data.repository
 
+import androidx.sqlite.SQLiteException
 import com.kmm.books.book.data.database.FavoriteBookDao
 import com.kmm.books.book.data.mappers.toBook
+import com.kmm.books.book.data.mappers.toBookEntity
 import com.kmm.books.book.data.network.RemoteBookDataSource
 import com.kmm.books.book.domain.Book
 import com.kmm.books.book.domain.BookRepository
@@ -53,10 +55,17 @@ class DefaultBookRepository(
     }
 
     override suspend fun markAsFavorite(book: Book): EmptyResult<DataError.Local> {
-        TODO("Not yet implemented")
+        return try {
+            favoriteBookDao.upsertBook(book.toBookEntity())
+            Result.Success(Unit)
+        } catch (ex: SQLiteException) {
+            Result.Error(DataError.Local.DISK_FULL)
+        }
+
+
     }
 
     override suspend fun deleteFavoriteBook(bookId: String) {
-        TODO("Not yet implemented")
+        favoriteBookDao.deleteFavoriteBookById(bookId)
     }
 }

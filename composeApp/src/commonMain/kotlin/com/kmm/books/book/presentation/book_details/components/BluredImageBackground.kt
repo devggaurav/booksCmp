@@ -12,6 +12,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.statusBarsPadding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -41,6 +42,7 @@ import androidx.compose.ui.unit.dp
 import coil3.compose.rememberAsyncImagePainter
 import com.kmm.books.core.presentation.DarkBlue
 import com.kmm.books.core.presentation.DesertWhite
+import com.kmm.books.core.presentation.PulseAnimation
 import com.kmm.books.core.presentation.SandYellow
 import gcbookscmp.composeapp.generated.resources.Res
 import gcbookscmp.composeapp.generated.resources.book_cover
@@ -145,7 +147,13 @@ fun BlurredImageBackground(
                 ) { result ->
                     when (result) {
 
-                        null -> CircularProgressIndicator()
+                        null -> Box(
+                            modifier = Modifier.fillMaxSize(),
+                            contentAlignment = Alignment.Center
+                        ) {
+                            PulseAnimation(modifier = Modifier.size(60.dp))
+                        }
+
                         else -> {
                             Box {
                                 Image(

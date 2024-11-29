@@ -10,9 +10,9 @@ actual class DatabaseFactory {
         val os = System.getProperty("os.name").lowercase()
         val userHome = System.getProperty("user.home")
         val appDataDir = when {
-            os.contains("win") -> File(System.getenv("APPDATA"), "Bookpedia")
-            os.contains("mac") -> File(userHome, "Library/Application Support/Bookpedia")
-            else -> File(userHome, ".local/share/Bookpedia")
+            os.contains("win") -> File(System.getenv("APPDATA"), "Books")
+            os.contains("mac") -> File(userHome, "Library/Application Support/Books")
+            else -> File(userHome, ".local/share/Books")
         }
 
         if (!appDataDir.exists()) {

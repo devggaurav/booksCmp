@@ -27,7 +27,7 @@ actual class DatabaseFactory {
             error = null
         )
 
-        return requireNotNull(documentDirectory?.path())
+        return requireNotNull(documentDirectory?.path)
     }
 
 

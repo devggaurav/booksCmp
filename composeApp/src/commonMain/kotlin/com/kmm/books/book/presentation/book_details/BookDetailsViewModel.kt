@@ -48,6 +48,20 @@ class BookDetailsViewModel(
 
             }
 
+            is BookDetailsAction.OnFavoriteClick -> {
+                viewModelScope.launch {
+                    if (state.value.isFavorite) {
+                        bookRepository.deleteFavoriteBook(bookId)
+                    } else {
+                        state.value.book?.let {
+                            bookRepository.markAsFavorite(it)
+                        }
+
+                    }
+                }
+
+            }
+
             else -> Unit
         }
     }
